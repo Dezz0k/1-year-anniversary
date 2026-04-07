@@ -68,6 +68,54 @@ body {
   visibility: hidden;
 }
 
+.auth-overlay {
+  z-index: 10;
+}
+
+.auth-card {
+  max-width: 420px;
+}
+
+.auth-form {
+  margin-top: 1rem;
+  text-align: left;
+}
+
+.auth-label {
+  display: block;
+  margin-top: 0.65rem;
+  margin-bottom: 0.25rem;
+  color: #ffe8f6;
+  font-size: 0.88rem;
+}
+
+.auth-input {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(14, 7, 20, 0.35);
+  color: #fff;
+  padding: 0.72rem 0.85rem;
+  font: inherit;
+  outline: none;
+}
+
+.auth-input:focus {
+  border-color: rgba(255, 129, 190, 0.9);
+  box-shadow: 0 0 0 3px rgba(255, 93, 158, 0.24);
+}
+
+.auth-btn {
+  width: 100%;
+}
+
+.auth-error {
+  min-height: 1.2rem;
+  margin-top: 0.6rem;
+  font-size: 0.86rem;
+  color: #ffd2e5;
+}
+
 .glass-card {
   width: min(92vw, 560px);
   padding: 2.5rem 2rem;

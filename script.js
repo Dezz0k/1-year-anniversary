@@ -1,3 +1,8 @@
+const authOverlay = document.getElementById("auth-overlay");
+const authForm = document.getElementById("auth-form");
+const authUsername = document.getElementById("auth-username");
+const authPassword = document.getElementById("auth-password");
+const authError = document.getElementById("auth-error");
 const introOverlay = document.getElementById("intro-overlay");
 const openButton = document.getElementById("open-button");
 const content = document.getElementById("content");
@@ -11,6 +16,8 @@ const ctx = canvas.getContext("2d");
 const names = ["Tori", "Yumi", "Wife"];
 let nameIndex = 0;
 let isOpen = false;
+const lockedUsername = "Dk_Yv";
+const lockedPassword = "1yearanniversary";
 
 function typeInElement(el, speed = 18) {
   const original = el.innerHTML;
@@ -52,6 +59,22 @@ function cycleNames() {
     }, 240);
   }, 2500);
 }
+
+authForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const enteredUser = authUsername.value.trim();
+  const enteredPass = authPassword.value;
+
+  if (enteredUser === lockedUsername && enteredPass === lockedPassword) {
+    authError.textContent = "";
+    authOverlay.classList.add("hidden");
+    introOverlay.classList.remove("hidden");
+    authForm.reset();
+    return;
+  }
+
+  authError.textContent = "That combo is not right. Try again, love.";
+});
 
 openButton.addEventListener("click", async () => {
   if (isOpen) return;

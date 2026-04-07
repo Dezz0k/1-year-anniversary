@@ -17,7 +17,22 @@
     <div id="hearts-layer" aria-hidden="true"></div>
 
     <main class="app">
-      <section id="intro-overlay" class="intro-overlay">
+      <section id="auth-overlay" class="intro-overlay auth-overlay">
+        <div class="glass-card auth-card">
+          <h1 class="intro-title">Private For Us</h1>
+          <p class="intro-subtitle">Only for my person. Enter to unlock.</p>
+          <form id="auth-form" class="auth-form" autocomplete="off">
+            <label class="auth-label" for="auth-username">Username</label>
+            <input id="auth-username" class="auth-input" type="text" required />
+            <label class="auth-label" for="auth-password">Password</label>
+            <input id="auth-password" class="auth-input" type="password" required />
+            <button class="open-btn auth-btn" type="submit">Unlock</button>
+            <p id="auth-error" class="auth-error" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="intro-overlay" class="intro-overlay hidden">
         <div class="glass-card">
           <h1 class="intro-title">1 Year Anniversary</h1>
           <p class="intro-subtitle">A little love page made with my whole heart.</p>
