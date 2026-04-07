@@ -196,8 +196,9 @@ body {
 .main-title {
   margin-top: 0.65rem;
   font-size: clamp(2rem, 6vw, 4.2rem);
-  line-height: 1.08;
+  line-height: 1.12;
   font-weight: 700;
+  text-shadow: 0 8px 24px rgba(18, 6, 24, 0.45);
 }
 
 .name-cycle {
@@ -212,9 +213,10 @@ body {
 .hero-text {
   width: min(740px, 95%);
   margin: 1rem auto 0;
-  color: #f5eaf0;
-  font-size: 1rem;
-  line-height: 1.7;
+  color: #fff5fb;
+  font-size: 1.08rem;
+  line-height: 1.9;
+  font-weight: 600;
 }
 
 .highlight {
@@ -275,11 +277,11 @@ body {
 }
 
 .letter {
-  margin-top: 2.2rem;
+  margin-top: 0;
   border-radius: 18px;
-  padding: 1.35rem 1.15rem;
+  padding: 1.5rem 1.3rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.11);
 }
 
 .letter h2 {
@@ -289,9 +291,10 @@ body {
 }
 
 .letter p {
-  color: #fcecf7;
-  line-height: 1.72;
-  margin-top: 0.4rem;
+  color: #fff4fb;
+  line-height: 1.9;
+  margin-top: 0.65rem;
+  font-size: 1.02rem;
 }
 
 .music-box {

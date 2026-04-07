@@ -17,11 +17,12 @@ const leftB = document.getElementById("fade-img-left-b");
 const rightA = document.getElementById("fade-img-right-a");
 const rightB = document.getElementById("fade-img-right-b");
 
-const names = ["Tori", "Yumi", "Wife"];
+const names = ["Tori", "Yuni"];
 let nameIndex = 0;
 let isOpen = false;
 let leftActiveA = true;
 let rightActiveA = true;
+let fadeStarted = false;
 const lockedUsername = "Dk_Yv";
 const lockedPassword = "1yearanniversary";
 const rememberKey = "anniversaryRemember";
@@ -70,7 +71,6 @@ function unlockAuthGate() {
   authError.textContent = "";
   authOverlay.classList.add("hidden");
   introOverlay.classList.remove("hidden");
-  tryStartSpotifyAudio();
 }
 
 function triggerReveals() {
@@ -129,6 +129,7 @@ openButton.addEventListener("click", async () => {
 
   introOverlay.classList.add("hidden");
   content.classList.remove("hidden");
+  tryStartSpotifyAudio();
   triggerReveals();
   startPhotoFades();
   burstParticles();
@@ -184,16 +185,19 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 
 const particles = [];
-const particleCount = 90;
+const particleCount = 70;
 
 for (let i = 0; i < particleCount; i += 1) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35,
-    r: Math.random() * 2.4 + 1,
-    a: Math.random() * 0.45 + 0.15
+    vx: (Math.random() - 0.5) * 0.18,
+    vy: Math.random() * 0.45 + 0.35,
+    w: Math.random() * 5 + 4,
+    h: Math.random() * 9 + 7,
+    a: Math.random() * 0.3 + 0.2,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.02
   });
 }
 
@@ -202,15 +206,22 @@ function animateParticles() {
   for (const p of particles) {
     p.x += p.vx;
     p.y += p.vy;
-    if (p.x < -5) p.x = canvas.width + 5;
-    if (p.x > canvas.width + 5) p.x = -5;
-    if (p.y < -5) p.y = canvas.height + 5;
-    if (p.y > canvas.height + 5) p.y = -5;
+    p.rot += p.rotSpeed;
+    if (p.x < -20) p.x = canvas.width + 20;
+    if (p.x > canvas.width + 20) p.x = -20;
+    if (p.y > canvas.height + 20) {
+      p.y = -20;
+      p.x = Math.random() * canvas.width;
+    }
 
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillStyle = `rgba(255, 196, 225, ${p.a})`;
     ctx.beginPath();
-    ctx.fillStyle = `rgba(255, 214, 241, ${p.a})`;
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.ellipse(0, 0, p.w, p.h, 0.4, 0, Math.PI * 2);
     ctx.fill();
+    ctx.restore();
   }
   requestAnimationFrame(animateParticles);
 }
@@ -248,29 +259,43 @@ function randomPhoto(exceptSrc = "") {
 }
 
 function startPhotoFades() {
-  if (!leftA || !leftB || !rightA || !rightB) return;
+  if (!leftA || !leftB || !rightA || !rightB || fadeStarted) return;
+  fadeStarted = true;
 
-  const firstSet = shuffle(photos);
-  leftA.src = firstSet[0] || photos[0];
-  rightA.src = firstSet[1] || photos[1] || photos[0];
-  leftB.src = randomPhoto(leftA.src);
-  rightB.src = randomPhoto(rightA.src);
+  const mixed = shuffle(photos);
+  const midpoint = Math.ceil(mixed.length / 2);
+  const leftPool = mixed.slice(0, midpoint);
+  const rightPool = mixed.slice(midpoint);
+  if (!rightPool.length) rightPool.push(...leftPool);
+
+  let leftIndex = 0;
+  let rightIndex = 0;
+
+  const nextFrom = (pool, idxRef) => {
+    const val = pool[idxRef % pool.length];
+    return val;
+  };
+
+  leftA.src = nextFrom(leftPool, leftIndex++);
+  leftB.src = nextFrom(leftPool, leftIndex++);
+  rightA.src = nextFrom(rightPool, rightIndex++);
+  rightB.src = nextFrom(rightPool, rightIndex++);
 
   setInterval(() => {
     const visible = leftActiveA ? leftA : leftB;
     const hidden = leftActiveA ? leftB : leftA;
-    hidden.src = randomPhoto(visible.src);
+    hidden.src = nextFrom(leftPool, leftIndex++);
     hidden.classList.add("show");
     visible.classList.remove("show");
     leftActiveA = !leftActiveA;
-  }, 4200);
+  }, 4600);
 
   setInterval(() => {
     const visible = rightActiveA ? rightA : rightB;
     const hidden = rightActiveA ? rightB : rightA;
-    hidden.src = randomPhoto(visible.src);
+    hidden.src = nextFrom(rightPool, rightIndex++);
     hidden.classList.add("show");
     visible.classList.remove("show");
     rightActiveA = !rightActiveA;
-  }, 5000);
+  }, 5100);
 }
