@@ -175,6 +175,7 @@ if (bgVideo) {
 }
 
 cycleNames();
+prepareLetterChunks();
 
 try {
   const saved = JSON.parse(localStorage.getItem(rememberKey) || "null");
@@ -340,10 +341,22 @@ function startPhotoFades() {
 }
 
 function revealLetterLines() {
-  const lines = document.querySelectorAll(".letter p");
-  lines.forEach((line, idx) => {
+  const chunks = document.querySelectorAll(".letter .line-chunk");
+  chunks.forEach((chunk, idx) => {
     setTimeout(() => {
-      line.classList.add("show-line");
-    }, 1800 + idx * 1800);
+      chunk.classList.add("show-chunk");
+    }, 1200 + idx * 820);
+  });
+}
+
+function prepareLetterChunks() {
+  const lines = document.querySelectorAll(".letter p");
+  lines.forEach((line) => {
+    const html = line.innerHTML.trim();
+    const chunks = html.split(/(?<=[.!?])\s+/).filter(Boolean);
+    if (chunks.length <= 1) return;
+    line.innerHTML = chunks
+      .map((chunk, idx) => `<span class="line-chunk">${chunk}${idx < chunks.length - 1 ? " " : ""}</span>`)
+      .join("");
   });
 }
