@@ -78,6 +78,7 @@ function unlockAuthGate() {
   authError.textContent = "";
   authOverlay.classList.add("hidden");
   introOverlay.classList.remove("hidden");
+  playBackgroundVideo();
 }
 
 function triggerReveals() {
@@ -138,7 +139,7 @@ openButton.addEventListener("click", async () => {
 
   introOverlay.classList.add("hidden");
   content.classList.remove("hidden");
-  playBackgroundVideo();
+  if (bgVideo && bgVideo.paused) playBackgroundVideo();
   triggerReveals();
   startPhotoFades();
   burstParticles();
@@ -164,6 +165,9 @@ if (videoVolumeToggle && bgVideo) {
 }
 
 if (bgVideo) {
+  bgVideo.pause();
+  bgVideo.currentTime = 0;
+
   bgVideo.addEventListener("timeupdate", () => {
     const fadeStart = VIDEO_SEGMENT_SECONDS - VIDEO_FADE_SECONDS;
     if (bgVideo.currentTime >= fadeStart && bgVideo.currentTime < VIDEO_SEGMENT_SECONDS) {
