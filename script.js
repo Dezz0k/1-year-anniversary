@@ -19,6 +19,8 @@ const rightB = document.getElementById("fade-img-right-b");
 const bgVideo = document.getElementById("bg-video");
 const videoVolumeToggle = document.getElementById("video-volume-toggle");
 const glassButtons = document.querySelectorAll(".glass-toggle");
+const VIDEO_SEGMENT_SECONDS = 130;
+const VIDEO_FADE_SECONDS = 4;
 
 const names = ["Tori", "Yuni"];
 let nameIndex = 0;
@@ -154,6 +156,21 @@ if (videoVolumeToggle && bgVideo) {
     videoVolumeToggle.textContent = bgVideo.muted ? "Unmute Video" : "Mute Video";
     if (!bgVideo.muted) bgVideo.volume = 0.6;
     bgVideo.play().catch(() => {});
+  });
+}
+
+if (bgVideo) {
+  bgVideo.addEventListener("timeupdate", () => {
+    const fadeStart = VIDEO_SEGMENT_SECONDS - VIDEO_FADE_SECONDS;
+    if (bgVideo.currentTime >= fadeStart && bgVideo.currentTime < VIDEO_SEGMENT_SECONDS) {
+      bgVideo.classList.add("fade-out");
+    }
+
+    if (bgVideo.currentTime >= VIDEO_SEGMENT_SECONDS) {
+      bgVideo.currentTime = 0;
+      bgVideo.classList.remove("fade-out");
+      bgVideo.play().catch(() => {});
+    }
   });
 }
 
