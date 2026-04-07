@@ -26,6 +26,10 @@
             <input id="auth-username" class="auth-input" type="text" required />
             <label class="auth-label" for="auth-password">Password</label>
             <input id="auth-password" class="auth-input" type="password" required />
+            <label class="remember-row" for="remember-me">
+              <input id="remember-me" type="checkbox" />
+              <span>Remember me</span>
+            </label>
             <button class="open-btn auth-btn" type="submit">Unlock</button>
             <p id="auth-error" class="auth-error" aria-live="polite"></p>
           </form>
@@ -50,70 +54,56 @@
           <p class="hero-text">
             One year down, forever to go. You are my favorite person, my peace, and my
             home. <span class="highlight">Every day with you feels like magic.</span>
+            <span class="highlight">Always you, always us.</span>
           </p>
         </header>
 
-        <section class="memory-grid reveal">
-          <article class="memory-card">
-            <img src="photos/VRChat_2025-11-07_00-51-54.407_1920x1080.png" alt="Memory 1" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2025-11-13_06-31-33.720_1920x1080.png" alt="Memory 2" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2025-11-13_06-32-25.672_1920x1080.png" alt="Memory 3" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2025-11-23_20-55-38.135_1080x1920.png" alt="Memory 4" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-02-14_14-59-55.644_1920x1080.png" alt="Memory 5" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-02-14_15-00-13.899_1920x1080.png" alt="Memory 6" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-02-26_20-06-49.758_1080x1920.png" alt="Memory 7" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-03-19_17-09-34.633_1920x1080.png" alt="Memory 8" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-04-01_21-51-19.799_1920x1080.png" alt="Memory 9" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-04-04_10-36-24.275_1920x1080.png" alt="Memory 10" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-04-06_12-17-34.420_1080x1920.png" alt="Memory 11" />
-          </article>
-          <article class="memory-card">
-            <img src="photos/VRChat_2026-04-06_12-18-39.506_1080x1920.png" alt="Memory 12" />
-          </article>
+        <section class="note-with-photos reveal">
+          <div class="fade-column">
+            <div class="fade-frame">
+              <img id="fade-img-left-a" class="fade-img show" alt="Memory left A" />
+              <img id="fade-img-left-b" class="fade-img" alt="Memory left B" />
+            </div>
+          </div>
+
+          <section class="letter">
+            <h2>My Note to You</h2>
+            <p>
+              Thank you for <span class="highlight">loving me</span>, for choosing me, and
+              for making life softer and brighter. You deserve every beautiful thing in the
+              world, and I promise to keep loving you in all the little ways and all the
+              big ways.
+            </p>
+            <p>
+              I made this page so you can always come back to it whenever you miss me.
+              <span class="highlight">Happy one year, my love.</span>
+            </p>
+          </section>
+
+          <div class="fade-column">
+            <div class="fade-frame">
+              <img id="fade-img-right-a" class="fade-img show" alt="Memory right A" />
+              <img id="fade-img-right-b" class="fade-img" alt="Memory right B" />
+            </div>
+          </div>
         </section>
 
-        <section class="letter reveal">
-          <h2>My Note to You</h2>
-          <p>
-            Thank you for loving me, for choosing me, and for making life softer and
-            brighter. You deserve every beautiful thing in the world, and I promise to
-            keep loving you in all the little ways and all the big ways.
-          </p>
-          <p>
-            I made this page so you can always come back to it whenever you miss me.
-            <span class="highlight">Happy one year, my love.</span>
-          </p>
+        <section class="music-box reveal">
+          <p class="stack-title">Our song: Love Me - JMSN</p>
+          <iframe
+            style="border-radius: 12px"
+            src="https://open.spotify.com/embed/track/28sawWzfucjbahooUtyrZx?utm_source=generator&autoplay=1"
+            width="100%"
+            height="152"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Spotify player - Love Me by JMSN"
+          ></iframe>
         </section>
       </section>
     </main>
-
-    <audio id="bg-music" loop preload="auto">
-      <source
-        src="https://cdn.pixabay.com/audio/2022/03/15/audio_7f1f31a6f5.mp3"
-        type="audio/mpeg"
-      />
-      Your browser does not support the audio element.
-    </audio>
 
     <script src="script.js"></script>
   </body>
