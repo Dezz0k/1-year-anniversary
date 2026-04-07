@@ -77,7 +77,7 @@ function triggerReveals() {
   revealEls.forEach((el, idx) => {
     setTimeout(() => {
       el.classList.add("show");
-      const textNodes = el.querySelectorAll("h1, h2, p");
+      const textNodes = el.querySelectorAll("h1, h2");
       textNodes.forEach((node, textIdx) => {
         setTimeout(() => {
           typeInElement(node, 52);
@@ -85,6 +85,8 @@ function triggerReveals() {
       });
     }, 400 + idx * 600);
   });
+
+  revealLetterLines();
 }
 
 function cycleNames() {
@@ -298,4 +300,13 @@ function startPhotoFades() {
     visible.classList.remove("show");
     rightActiveA = !rightActiveA;
   }, 5100);
+}
+
+function revealLetterLines() {
+  const lines = document.querySelectorAll(".letter p");
+  lines.forEach((line, idx) => {
+    setTimeout(() => {
+      line.classList.add("show-line");
+    }, 1300 + idx * 900);
+  });
 }
