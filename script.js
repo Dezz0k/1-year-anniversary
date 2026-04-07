@@ -327,6 +327,6 @@ function revealLetterLines() {
   lines.forEach((line, idx) => {
     setTimeout(() => {
       line.classList.add("show-line");
-    }, 1300 + idx * 900);
+    }, 1800 + idx * 1800);
   });
 }
