@@ -16,6 +16,9 @@ const leftA = document.getElementById("fade-img-left-a");
 const leftB = document.getElementById("fade-img-left-b");
 const rightA = document.getElementById("fade-img-right-a");
 const rightB = document.getElementById("fade-img-right-b");
+const bgVideo = document.getElementById("bg-video");
+const videoVolumeToggle = document.getElementById("video-volume-toggle");
+const glassButtons = document.querySelectorAll(".glass-toggle");
 
 const names = ["Tori", "Yuni"];
 let nameIndex = 0;
@@ -59,12 +62,10 @@ function typeInElement(el, speed = 48) {
   }, speed);
 }
 
-function tryStartSpotifyAudio() {
-  const spotifyFrame = document.querySelector('iframe[src*="open.spotify.com/embed/track"]');
-  if (spotifyFrame) {
-    const base = "https://open.spotify.com/embed/track/28sawWzfucjbahooUtyrZx";
-    spotifyFrame.src = `${base}?utm_source=generator&autoplay=1`;
-  }
+function playBackgroundVideo() {
+  if (!bgVideo) return;
+  bgVideo.muted = true;
+  bgVideo.play().catch(() => {});
 }
 
 function unlockAuthGate() {
@@ -131,11 +132,30 @@ openButton.addEventListener("click", async () => {
 
   introOverlay.classList.add("hidden");
   content.classList.remove("hidden");
-  tryStartSpotifyAudio();
+  playBackgroundVideo();
   triggerReveals();
   startPhotoFades();
   burstParticles();
 });
+
+glassButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const frameId = button.getAttribute("data-target");
+    const frame = frameId ? document.getElementById(frameId) : null;
+    if (!frame) return;
+    frame.classList.toggle("glass");
+    button.textContent = frame.classList.contains("glass") ? "Clear" : "Glass";
+  });
+});
+
+if (videoVolumeToggle && bgVideo) {
+  videoVolumeToggle.addEventListener("click", () => {
+    bgVideo.muted = !bgVideo.muted;
+    videoVolumeToggle.textContent = bgVideo.muted ? "Unmute Video" : "Mute Video";
+    if (!bgVideo.muted) bgVideo.volume = 0.6;
+    bgVideo.play().catch(() => {});
+  });
+}
 
 cycleNames();
 
