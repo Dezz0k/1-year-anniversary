@@ -253,7 +253,7 @@ body {
 .note-with-photos {
   margin-top: 2.2rem;
   display: grid;
-  grid-template-columns: minmax(105px, 0.52fr) 2.1fr minmax(105px, 0.52fr);
+  grid-template-columns: minmax(120px, 0.62fr) 2fr minmax(120px, 0.62fr);
   gap: 0.7rem;
   align-items: start;
 }
@@ -265,12 +265,12 @@ body {
 .fade-frame {
   position: sticky;
   top: 0.8rem;
-  width: clamp(100px, 13vw, 160px);
+  width: clamp(125px, 16vw, 195px);
   margin: 0 auto;
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   overflow: hidden;
-  min-height: 300px;
+  min-height: 340px;
   aspect-ratio: 9 / 16;
   background: rgba(8, 5, 12, 0.55);
   box-shadow: 0 12px 24px rgba(13, 5, 18, 0.42);
