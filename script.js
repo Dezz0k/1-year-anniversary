@@ -66,8 +66,12 @@ function typeInElement(el, speed = 48) {
 
 function playBackgroundVideo() {
   if (!bgVideo) return;
-  bgVideo.muted = true;
+  bgVideo.muted = false;
+  bgVideo.volume = 0.6;
   bgVideo.play().catch(() => {});
+  if (videoVolumeToggle) {
+    videoVolumeToggle.textContent = "Mute Video";
+  }
 }
 
 function unlockAuthGate() {
